@@ -42,3 +42,4 @@ a=0 #lower bound
 epsilon=0.001 # (threshold)
 golden_alpha = 0.618
 golden_section(phi,a,b,epsilon,golden_alpha)
+

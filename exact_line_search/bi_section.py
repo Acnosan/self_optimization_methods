@@ -5,6 +5,7 @@ import numpy as np
 from plot_functions.script import bisection_plot
 
 def bisection(phi_func,a,b,l,epsilon):
+    step=0
     while(b-a >= l):
         lambdaa=(a+b)/2 - epsilon
         mu=(a+b)/2 + epsilon
@@ -15,21 +16,24 @@ def bisection(phi_func,a,b,l,epsilon):
             a = lambdaa
         else:
             b = mu
-    print(f'[a b] = [{a:.6f} {b:.6f}], alpha = {(a+b)/2}')
+        step+=1
+    alpha_star = (a+b)/2
+    print(f'step {step} : [a b] = [{a:.6f} {b:.6f}], alpha = {alpha_star}')
     phi_func = sp.lambdify(sp.symbols('alpha'), phi_func, modules='numpy')
     alpha_values = np.linspace(a,b,50)
-    bisection_plot(phi_func,alpha_values,a,b)
+    bisection_plot(phi_func,alpha_values,alpha_star,a,b)
 
+## FROM HERE INPUT YOUR CHANGES
 function = sp.Pow(x-1,2)+sp.Pow(y,3)-x*y
-dk = sp.Matrix([1,-2])
-xy = sp.Matrix([1,1])
+dk = sp.Matrix([1,-2]) ## the dk (direction of gradient)
+xy = sp.Matrix([1,1]) ## starting point
 
 xy_alpha = xy+alpha*dk
 phi=function.subs({x:xy_alpha[0],y:xy_alpha[1]})
 print(f'xy_alpha : {xy_alpha}')
-print(f'phi : {phi}')
+print(f'phi func: {phi}')
 epsilon = 1e-6
-b=0.4
-a=0
-l=0.001
+b=0.4 #upper bound
+a=0 #lower bound
+l=0.001 #l (threshold)
 bisection(phi,a,b,l,epsilon)

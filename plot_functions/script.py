@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
-import sympy as sp
 
 def grad_desc_plot(phi_func,alpha_values,alpha_star):
     plt.figure(figsize=(12,8))

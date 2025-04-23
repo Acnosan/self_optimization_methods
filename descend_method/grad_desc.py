@@ -18,7 +18,7 @@ def grad_desc(function,alphas,x0y0,epsilon):
                 break
             direction = -a * gradient
             x_y_step = x_y_step + direction
-            if step%10 == 0:
+            if step%20 == 0:
                 print(f'step {step} : x{step}_y{step} = {x_y_step}')
             step+=1
         else:
@@ -63,6 +63,8 @@ def grad_desc_solve_for_alpha(function,x0y0):
 
     return opt_history
 
+## -----------------------------------------------------------------
+## YOUR CHANGES HERE 
 print(f'---- QUADRATIC FORM')
 function = sp.Pow(x,2)+sp.Pow(y,2) ## x^2 + y^2
 hess_matrix = sp.Matrix(hessian(function,(x,y)))
@@ -72,9 +74,9 @@ s = 1/2*sp.transpose(arrx)*hess_matrix*arrx - sp.transpose(b)*arrx
 sp.pprint(f'Quadratic form :{s}')
 
 print(f'---- USING GRADIENT DESC')
-alphas = [0.05,1]
+alphas = [0.05,1] ## TEST ALPHA VALUES
 epsilon = 1e-5
-x0y0 = np.array([1,1],dtype=float)
+x0y0 = np.array([1,1],dtype=float) ## TEST WITH AN INITIAL POINT
 grad_desc(s,alphas,x0y0,epsilon)
 
 opt_history = grad_desc_solve_for_alpha(s,x0y0)

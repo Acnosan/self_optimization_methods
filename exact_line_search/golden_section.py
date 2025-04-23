@@ -19,7 +19,7 @@ def golden_section(phi_func,a,b,epsilon,golden_alpha):
         else:
             b = mu
             mu = lambdaa
-            lambdaa=a+(1-golden_alpha)*(b-a)
+            lambdaa = a+(1-golden_alpha)*(b-a)
         step+=1
     alpha_star = (a+b)/2
     print(f'step {step} : [a b] = [{a:.6f} {b:.6f}], alpha = {alpha_star}')
@@ -27,18 +27,19 @@ def golden_section(phi_func,a,b,epsilon,golden_alpha):
     alpha_values = np.linspace(a,b,50)
     golden_section_plot(phi_func,alpha_values,alpha_star,a,b)
 
-## FROM HERE INPUT YOUR CHANGES
+## -----------------------------------------------------------------
+## YOUR CHANGES HERE 
 function = sp.Pow(x-1,2)+sp.Pow(y,3)-x*y
-dk = sp.Matrix([1,-2]) ## the dk (direction of gradient)
-xy = sp.Matrix([1,1]) ## starting point
+dk = sp.Matrix([1,-2]) ## direction of gradient
+xy = sp.Matrix([1,1]) ## TEST WITH AN INITIAL POINT
 
 xy_alpha = xy+alpha*dk
 phi=function.subs({x:xy_alpha[0],y:xy_alpha[1]})
 print(f'xy_alpha : {xy_alpha}')
 print(f'phi func: {phi}')
 
-b=0.4 #upper bound
-a=0 #lower bound
+b=0.4 # upper bound
+a=0 # lower bound
 epsilon=0.001 # (threshold)
 golden_alpha = 0.618
 golden_section(phi,a,b,epsilon,golden_alpha)

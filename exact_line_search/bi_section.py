@@ -23,17 +23,18 @@ def bisection(phi_func,a,b,l,epsilon):
     alpha_values = np.linspace(a,b,50)
     bisection_plot(phi_func,alpha_values,alpha_star,a,b)
 
-## FROM HERE INPUT YOUR CHANGES
+## -----------------------------------------------------------------
+## YOUR CHANGES HERE 
 function = sp.Pow(x-1,2)+sp.Pow(y,3)-x*y
-dk = sp.Matrix([1,-2]) ## the dk (direction of gradient)
-xy = sp.Matrix([1,1]) ## starting point
+dk = sp.Matrix([1,-2]) ## direction of gradient
+xy = sp.Matrix([1,1]) ## TEST WITH AN INITIAL POINT
 
 xy_alpha = xy+alpha*dk
 phi=function.subs({x:xy_alpha[0],y:xy_alpha[1]})
 print(f'xy_alpha : {xy_alpha}')
 print(f'phi func: {phi}')
 epsilon = 1e-6
-b=0.4 #upper bound
-a=0 #lower bound
-l=0.001 #l (threshold)
+b=0.4 # upper bound
+a=0 # lower bound
+l=0.001 # l (threshold)
 bisection(phi,a,b,l,epsilon)

@@ -40,6 +40,8 @@ def newton(function,hess_matrix,x0_y0,epsilon):
     
     newton_plot(phi_func,alpha_values,alpha_star)
 
+## -----------------------------------------------------------------
+## YOUR CHANGES HERE 
 print(f'---- QUADRATIC FORM')
 function = sp.Pow(x,2)+sp.Pow(y,2) ## x^2 + y^2
 hess_matrix = hessian(function,(x,y))
@@ -48,9 +50,8 @@ b = sp.Matrix([0,0])
 s = 1/2*sp.transpose(arrx)*hess_matrix*arrx - sp.transpose(b)*arrx
 sp.pprint(f'Quadratic form :{s}')
 
-x0_y0 = np.array([1,1],dtype=float)
+x0_y0 = np.array([1,1],dtype=float)  ## TEST WITH AN INITIAL POINT
 epsilon = 1e-5
-
 newton(s,hess_matrix,x0_y0,epsilon)
 
 

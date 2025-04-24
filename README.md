@@ -1,9 +1,10 @@
 # optimization_methods
-Multiple Optimization Methods to find the optimal value(s) that minimize a function.
+Multiple Optimization Methods to find the optimal value(s) that minimizes a function.
+Currently works for 2 variables functions (x,y)
 
 ## Included Methods:
-| Method | Functions |
-| --- | --- |
+| Methods | Algorithms |
+| :---: | :---: |
 | `Descend Methods` | Basic Gradient Descend <br> Newton |
 | `Exact Line Search Methods` | Bi Section <br> Golden Section |
 | `InExact Line Search Methods` | Armijo |

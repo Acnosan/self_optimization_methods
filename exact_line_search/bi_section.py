@@ -1,7 +1,7 @@
 import sympy as sp
 from sympy.abc import x,y,alpha
 import numpy as np
-
+from math import log
 from plot_functions.script import bisection_plot
 
 def bisection(phi_func,a,b,l,epsilon):
@@ -38,3 +38,6 @@ b=0.4 # upper bound
 a=0 # lower bound
 l=0.001 # l (threshold)
 bisection(phi,a,b,l,epsilon)
+
+N = log((b-a)/l)/log(2)
+print(f'The Minimal Number of Iterations is around {N}')

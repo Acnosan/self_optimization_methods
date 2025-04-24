@@ -67,7 +67,7 @@ def grad_desc_solve_for_alpha(function,x0y0):
 ## YOUR CHANGES HERE 
 print(f'---- QUADRATIC FORM')
 function = sp.Pow(x,2)+sp.Pow(y,2) ## x^2 + y^2
-hess_matrix = sp.Matrix(hessian(function,(x,y)))
+hess_matrix = hessian(function,(x,y))
 arrx = sp.Matrix([x,y])
 b = sp.Matrix([0,0])
 s = 1/2*sp.transpose(arrx)*hess_matrix*arrx - sp.transpose(b)*arrx

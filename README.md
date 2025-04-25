@@ -5,8 +5,8 @@ Currently works for 2 variables functions (x,y)
 ## Included Methods:
 | Methods | Algorithms |
 | :---: | :---: |
-| `Descend Methods` | Basic Gradient Descend <br> Newton |
-| `Exact Line Search Methods` | Bi Section <br> Golden Section |
+| `Descend Methods` | Basic Gradient Descend |
+| `Exact Line Search Methods` | Bi Section <br> Golden Section <br> Newton |
 | `InExact Line Search Methods` | Armijo |
 
 # How to Run :

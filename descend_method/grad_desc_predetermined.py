@@ -24,6 +24,11 @@ def grad_desc(function,alphas,x0y0,epsilon):
         else:
             print(f'step 500 : for alpha {a}, the function did not converge')
         print(f'Final step {step} : x{step}_y{step} = {x_y_step}')
+    opt_history = grad_desc_solve_for_alpha(s,x0y0)
+
+    print(f"Best Alpha = {opt_history['alpha*']}")
+    print(f"x*_y* = {opt_history['x*_y*']}")
+    print(f"Evaluated = {opt_history['evaluated'][0]}")
 
 def grad_desc_solve_for_alpha(function,x0y0):
     print(f'---- USING THE PHI FUNCTION WITH RESPECT TO ALPHA')
@@ -45,13 +50,11 @@ def grad_desc_solve_for_alpha(function,x0y0):
         for alphaStar in optimal_alphas.values():
             alpha_value = float(alphaStar)
             xstar_ystar = x0y0 + alpha_value*dk
-            optimal_expr = s.subs({x: xstar_ystar[0], y: xstar_ystar[1]})
             evaluated = s.evalf(subs={x: xstar_ystar[0], y: xstar_ystar[1]})
             
             opt_history.append({
                 'alpha*' : alpha_value,
                 'x*_y*' : xstar_ystar,
-                'function_with_substitution' : optimal_expr,
                 'evaluated' : evaluated
             })
             
@@ -60,8 +63,6 @@ def grad_desc_solve_for_alpha(function,x0y0):
     alpha_values = np.linspace(float(alpha_star)-5, float(alpha_star)+5, 50)
     phi_alpha = sp.lambdify(alpha,phi_alpha,modules='numpy')
     grad_desc_plot(phi_alpha,alpha_values,alpha_star)
-
-    return opt_history
 
 ## -----------------------------------------------------------------
 ## YOUR CHANGES HERE 
@@ -78,10 +79,3 @@ alphas = [0.05,0.3] ## TEST ALPHA VALUES
 epsilon = 1e-5
 x0y0 = np.array([1,1],dtype=float) ## TEST WITH AN INITIAL POINT
 grad_desc(s,alphas,x0y0,epsilon)
-
-opt_history = grad_desc_solve_for_alpha(s,x0y0)
-
-print(f"Best Alpha = {opt_history['alpha*']}")
-print(f"x*_y* = {opt_history['x*_y*']}")
-print(f"function with substitution  = {opt_history['function_with_substitution'][0]}")
-print(f"Evaluated = {opt_history['evaluated'][0]}")

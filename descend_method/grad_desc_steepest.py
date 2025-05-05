@@ -5,7 +5,7 @@ import numpy as np
 
 from plot_functions.script import grad_desc_plot
 
-def grad_desc(function,x0y0,epsilon):
+def grad_desc_steep(function,x0y0,epsilon):
     derivatives = [function.diff(x)[0],function.diff(y)[0]]
     x_y_step = x0y0.copy()
     step = 0
@@ -44,14 +44,12 @@ def grad_desc_solve_for_alpha(function,x0y0,dk):
         for alpha_star in optimal_alphas.values():
             alpha_star = float(alpha_star)
             xstar_ystar = x0y0 + alpha_star*dk
-            #optimal_expr = function.subs({x: xstar_ystar[0], y: xstar_ystar[1]})
             evaluated = function.evalf(subs={x: xstar_ystar[0], y: xstar_ystar[1]})
             
             opt_history.append({
                 'alpha*' : alpha_star,
                 'phi_alpha': phi_alpha,
                 'x*_y*' : xstar_ystar,
-                #'function_with_substitution' : optimal_expr,
                 'evaluated' : evaluated
             })
             
@@ -71,4 +69,4 @@ sp.pprint(f'Quadratic form :{s}')
 print(f'---- USING GRADIENT DESC (Steepest)')
 epsilon = 1e-5
 x0y0 = np.array([1,1],dtype=float) ## TEST WITH AN INITIAL POINT
-grad_desc(s,x0y0,epsilon)
+grad_desc_steep(s,x0y0,epsilon)

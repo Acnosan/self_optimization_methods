@@ -9,7 +9,9 @@ def grad_desc_armijo(function,x0_y0,alpha_star,beta,pii,epsilon):
     step=0
     x_y_step = x0_y0.copy()
     derivatives = [function.diff(x)[0],function.diff(y)[0]]
-    gradient = np.array([d.evalf(subs={x:x_y_step[0],y:x_y_step[1]})for d in derivatives],dtype=float)
+    gradient = np.array(
+        [d.evalf(subs={x:x_y_step[0],y:x_y_step[1]})for d in derivatives]
+        ,dtype=float)
     while (np.linalg.norm(gradient) >= epsilon):
         dk = -gradient
         x_y_alpha = x_y_step+alpha*dk
@@ -23,6 +25,7 @@ def grad_desc_armijo(function,x0_y0,alpha_star,beta,pii,epsilon):
         
         while(phi_evaluated>phi_init_evaluated+(alpha_star*beta*phi_prime_evaluated)):
             alpha_star *= pii
+            print(f"alpha* = {alpha_star}")
             phi_evaluated=float(phi_func.evalf(subs={alpha:alpha_star})[0])
         else:
             print(f"Step {step}, alpha_star:{alpha_star}, phi func: {phi_evaluated:.6f}, phi(0): {phi_init_evaluated:.6f}, phi'(0): {phi_prime_evaluated:.6f}")
@@ -45,9 +48,10 @@ b = sp.Matrix([0,0])
 s = 1/2*sp.transpose(arrx)*hess_matrix*arrx - sp.transpose(b)*arrx
 sp.pprint(f'Quadratic form :{s}')
 
+print(f'---- USING GRADIENT DESC WITH ARMIJO CONDITION')
 x0_y0 = np.array([1,1],dtype=float)
 beta=1e-4
 pii=1/2
 epsilon=1e-5
-alpha_star=0.4
+alpha_star=5
 grad_desc_armijo(s,x0_y0,alpha_star,beta,pii,epsilon)
